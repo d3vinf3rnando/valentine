@@ -2,89 +2,154 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>💖 Valentine 💖</title>
+  <title>💜 For Thamasha 💜</title>
+
   <style>
     body {
       margin: 0;
       height: 100vh;
+      overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
-      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-      font-family: "Arial", sans-serif;
-      text-align: center;
+      background: linear-gradient(135deg, #b983ff, #ff9ad5);
+      font-family: "Comic Sans MS", "Arial", sans-serif;
     }
 
     .card {
-      background: white;
-      padding: 40px;
-      border-radius: 20px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      background: rgba(255, 255, 255, 0.9);
+      padding: 40px 50px;
+      border-radius: 30px;
+      text-align: center;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.25);
+      position: relative;
+      z-index: 2;
     }
 
     h1 {
+      color: #7a2cff;
       margin-bottom: 30px;
-      color: #ff4d6d;
+      font-size: 32px;
     }
 
     button {
-      font-size: 18px;
-      padding: 12px 24px;
-      margin: 10px;
+      font-size: 20px;
+      padding: 14px 28px;
+      margin: 12px;
       border: none;
-      border-radius: 30px;
+      border-radius: 40px;
       cursor: pointer;
       transition: all 0.3s ease;
     }
 
     #yesBtn {
-      background: #ff4d6d;
+      background: linear-gradient(135deg, #ff5fd2, #b983ff);
       color: white;
+      box-shadow: 0 10px 20px rgba(255, 95, 210, 0.5);
     }
 
     #noBtn {
-      background: #ccc;
+      background: #ddd;
+      color: #555;
     }
 
     #message {
-      margin-top: 30px;
-      font-size: 22px;
-      color: #ff4d6d;
       display: none;
+      font-size: 24px;
+      color: #7a2cff;
+      line-height: 1.6;
+    }
+
+    /* HEARTS */
+    .heart {
+      position: absolute;
+      bottom: -20px;
+      font-size: 20px;
+      animation: floatUp 6s linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-110vh) scale(1.6);
+        opacity: 0;
+      }
     }
   </style>
 </head>
 <body>
 
+  <!-- Background Music -->
+  <audio id="bgMusic" loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/10/03/audio_1d8e2fcd42.mp3" type="audio/mpeg">
+  </audio>
+
   <div class="card">
-    <h1>Will you be my Valentine? 💕</h1>
+    <h1>Thamasha 💕<br>Will you be my Valentine?</h1>
 
     <button id="yesBtn" onclick="sayYes()">Yes 💖</button>
     <button id="noBtn" onclick="sayNo()">No 💔</button>
 
     <div id="message">
-      🌹 Yay! You just made my heart the happiest ❤️  
+      🦄💜 Yayyyyy Thamasha! 💜🦄  
       <br><br>
-      Happy Valentine’s Day 💕
+      You just made my whole universe brighter ✨  
+      <br>
+      Every heartbeat, every smile —  
+      I want them all with you ❤️  
+      <br><br>
+      Happy Valentine’s Day, my unicorn 🌸
     </div>
   </div>
 
   <script>
-    let yesSize = 18;
+    let yesSize = 20;
+    let musicStarted = false;
 
     function sayNo() {
-      yesSize += 8;
+      if (!musicStarted) startMusic();
+      yesSize += 10;
       const yesBtn = document.getElementById("yesBtn");
       yesBtn.style.fontSize = yesSize + "px";
       yesBtn.style.padding = (yesSize / 2) + "px " + yesSize + "px";
     }
 
     function sayYes() {
+      if (!musicStarted) startMusic();
       document.querySelector("h1").style.display = "none";
       document.getElementById("yesBtn").style.display = "none";
       document.getElementById("noBtn").style.display = "none";
       document.getElementById("message").style.display = "block";
     }
+
+    function startMusic() {
+      const music = document.getElementById("bgMusic");
+      music.play();
+      musicStarted = true;
+    }
+
+    // HEART GENERATOR
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerText = "💖";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (4 + Math.random() * 4) + "s";
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 8000);
+    }
+
+    setInterval(createHeart, 300);
   </script>
 
 </body>
